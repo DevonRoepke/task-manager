@@ -1,9 +1,15 @@
-const app = require('./app')
-const port = process.env.PORT
+const express = require('express')
+require('./db/mongoose')
+const taskRouter = require('./routers/task')
+const userRouter = require('./routers/user')
 
-app.listen(port, () => {
-    console.log('Server is up on port ' + port)
-})
+const app = express()
+
+app.use(express.json())
+app.use(userRouter)
+app.use(taskRouter)
+
+module.exports = app
 
 // app.use((req, res, next) => {
 //     if(req.method === "GET") {
